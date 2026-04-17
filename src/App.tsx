@@ -59,8 +59,8 @@ const App = () => {
     <div className="min-h-screen bg-slate-50 text-slate-900 transition-colors dark:bg-gray-950 dark:text-white">
       <header className="sticky top-0 z-40 border-b border-slate-200 bg-white/90 backdrop-blur-sm dark:border-gray-800 dark:bg-gray-900/80">
         <div className="mx-auto flex max-w-screen-2xl items-center gap-3 px-5 py-4">
-          <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-blue-600">
-            <DisneyDashboardIcon className="h-5 w-5 text-white" />
+          <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-white dark:bg-gray-800">
+            <DisneyDashboardIcon className="fill-slate-900 dark:fill-white" />
           </div>
           <div>
             <h1 className="text-lg font-bold leading-none tracking-tight text-slate-900 dark:text-white">
@@ -136,7 +136,7 @@ const App = () => {
               />
             </div>
 
-            <div className="w-full flex-shrink-0 xl:w-96">
+            <div className="w-full shrink-0 xl:w-96">
               <FilmsPieChart characters={characters} />
             </div>
           </div>

@@ -13,10 +13,10 @@ const ListSection = ({ title, items, color }: { title: string; items: string[]; 
     {items.length === 0 ? (
       <p className="text-sm text-slate-400 dark:text-gray-600">None</p>
     ) : (
-      <ul className="custom-scrollbar max-h-36 space-y-1 overflow-y-auto pr-1">
+      <ul className="custom-scrollbar max-h-56 space-y-1 overflow-y-auto pr-1">
         {items.map((item, i) => (
           <li key={i} className={`flex items-center gap-2 text-sm ${color}`}>
-            <span className="h-1.5 w-1.5 flex-shrink-0 rounded-full bg-current opacity-60" />
+            <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-current opacity-60" />
             {item}
           </li>
         ))}
@@ -49,7 +49,7 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
         className="relative flex max-h-[90vh] w-full max-w-lg flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-2xl dark:border-gray-700 dark:bg-gray-900"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="relative h-52 flex-shrink-0 bg-slate-100 dark:bg-gray-800">
+        <div className="relative h-52 shrink-0 bg-slate-100 dark:bg-gray-800">
           {character.imageUrl ? (
             <img src={character.imageUrl} alt={character.name} className="h-full w-full object-cover object-top" />
           ) : (
@@ -78,11 +78,11 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
                   {character.videoGames.length} Video Game{character.videoGames.length !== 1 ? "s" : ""}
                 </span>
               )}
-              {character.films.length > 0 && (
+              {/* {character.films.length > 0 && (
                 <span className="rounded-full bg-amber-600/90 px-2 py-0.5 text-xs text-amber-50 dark:bg-amber-600/80 dark:text-amber-100">
                   {character.films.length} Film{character.films.length !== 1 ? "s" : ""}
                 </span>
-              )}
+              )} */}
             </div>
           </div>
         </div>
@@ -97,9 +97,9 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
             />
           </div>
 
-          {character.films.length > 0 && (
+          {/* {character.films.length > 0 && (
             <ListSection title="Films" items={character.films} color="text-amber-700 dark:text-amber-300" />
-          )}
+          )} */}
 
           {(character.allies.length > 0 || character.enemies.length > 0) && (
             <div className="grid grid-cols-2 gap-5 border-t border-slate-200 pt-4 dark:border-gray-800">
