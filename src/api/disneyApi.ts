@@ -2,6 +2,18 @@ import type { ApiResponse, DisneyCharacter } from "../types/disney";
 
 const BASE_URL = "https://api.disneyapi.dev/character";
 
+const isRecord = (value: unknown): value is Record<string, unknown> => typeof value === "object" && value !== null;
+
+const normalizeToCharacterArray = (raw: unknown): DisneyCharacter[] => {
+  if (Array.isArray(raw)) {
+    return raw.filter((item): item is DisneyCharacter => isRecord(item) && typeof item._id === "number");
+  }
+  if (isRecord(raw) && typeof raw._id === "number") {
+    return [raw as unknown as DisneyCharacter];
+  }
+  return [];
+};
+
 export interface FetchCharactersParams {
   page: number;
   pageSize: number;
