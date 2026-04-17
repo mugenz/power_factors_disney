@@ -18,6 +18,7 @@ const App = () => {
   const [tvShowInput, setTvShowInput] = useState("");
   const [sortOrder, setSortOrder] = useState<SortOrder>(null);
   const [selectedCharacter, setSelectedCharacter] = useState<DisneyCharacter | null>(null);
+  const [hoveredCharacterId, setHoveredCharacterId] = useState<number | null>(null);
 
   const debouncedSearch = useDebounce(searchInput, 400);
   const debouncedTvShow = useDebounce(tvShowInput, 400);
@@ -133,11 +134,12 @@ const App = () => {
                 onPageSizeChange={handlePageSizeChange}
                 onSortToggle={handleSortToggle}
                 onRowClick={setSelectedCharacter}
+                onRowHover={setHoveredCharacterId}
               />
             </div>
 
-            <div className="w-full shrink-0 xl:w-[450px]">
-              <FilmsPieChart characters={characters} />
+            <div className="w-full shrink-0 xl:w-[450px] xl:self-start xl:sticky xl:top-24">
+              <FilmsPieChart characters={characters} hoveredCharacterId={hoveredCharacterId} />
             </div>
           </div>
         )}

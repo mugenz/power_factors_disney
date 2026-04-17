@@ -16,6 +16,7 @@ interface CharacterTableProps {
   onPageSizeChange: (size: number) => void;
   onSortToggle: () => void;
   onRowClick: (character: DisneyCharacter) => void;
+  onRowHover: (characterId: number | null) => void;
 }
 
 const CharacterTable = ({
@@ -30,6 +31,7 @@ const CharacterTable = ({
   onPageSizeChange,
   onSortToggle,
   onRowClick,
+  onRowHover,
 }: CharacterTableProps) => {
   const sortedCharacters = useMemo(() => {
     if (!sortOrder) return characters;
@@ -122,6 +124,8 @@ const CharacterTable = ({
                 <tr
                   key={character._id}
                   onClick={() => onRowClick(character)}
+                  onMouseEnter={() => onRowHover(character._id)}
+                  onMouseLeave={() => onRowHover(null)}
                   className="cursor-pointer transition-colors hover:bg-slate-50 dark:hover:bg-gray-800/60"
                 >
                   <td className="px-4 py-3 text-xs text-slate-400 dark:text-gray-600">

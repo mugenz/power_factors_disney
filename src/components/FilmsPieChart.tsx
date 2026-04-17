@@ -8,22 +8,25 @@ import { ExportIcon } from "./icons";
 
 interface FilmsPieChartProps {
   characters: DisneyCharacter[];
+  hoveredCharacterId: number | null;
 }
 
-const FilmsPieChart = ({ characters }: FilmsPieChartProps) => {
+const FilmsPieChart = ({ characters, hoveredCharacterId }: FilmsPieChartProps) => {
   const { theme } = useTheme();
   const isNight = theme === "night";
 
-  const chartData = characters
-    .filter((c) => c.films.length > 0)
-    .map((c) => ({
-      name: c.name,
-      y: c.films.length,
-      films: c.films,
-    }));
+  const chartData = useMemo(
+    () =>
+      characters.filter((c) => c.films.length > 0).map((c) => ({
+        id: c._id,
+        name: c.name,
+        y: c.films.length,
+        films: c.films,
+      })),
+    [characters],
+  );
 
   const hasData = chartData.length > 0;
-
   const options: Highcharts.Options = useMemo(() => {
     const tooltipBg = isNight ? "#1f2937" : "#ffffff";
     const tooltipBorder = isNight ? "#374151" : "#e2e8f0";
@@ -78,7 +81,16 @@ const FilmsPieChart = ({ characters }: FilmsPieChartProps) => {
         {
           type: "pie",
           name: "Films",
-          data: chartData,
+          data: chartData.map((point) => {
+            const isHighlighted = hoveredCharacterId === point.id;
+            return {
+              ...point,
+              sliced: isHighlighted,
+              selected: isHighlighted,
+              borderWidth: isHighlighted ? 3 : 0.5,
+              borderColor: isHighlighted ? (isNight ? "#93c5fd" : "#1d4ed8") : undefined,
+            };
+          }),
           colors: [
             "#3b82f6",
             "#8b5cf6",
@@ -109,7 +121,7 @@ const FilmsPieChart = ({ characters }: FilmsPieChartProps) => {
         ],
       },
     };
-  }, [chartData, isNight]);
+  }, [chartData, hoveredCharacterId, isNight]);
 
   const handleExportXLSX = () => {
     const rows = chartData.map((item) => ({
