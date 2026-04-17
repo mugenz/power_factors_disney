@@ -57,7 +57,7 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
               <span className="text-7xl font-bold text-slate-300 dark:text-gray-700">{character.name[0]}</span>
             </div>
           )}
-          <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent dark:from-gray-900 dark:via-gray-900/20" />
+          <div className="absolute inset-0 bg-linear-to-t from-white via-white/20 to-transparent dark:from-gray-900 dark:via-gray-900/20" />
           <button
             type="button"
             onClick={onClose}
@@ -78,11 +78,6 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
                   {character.videoGames.length} Video Game{character.videoGames.length !== 1 ? "s" : ""}
                 </span>
               )}
-              {/* {character.films.length > 0 && (
-                <span className="rounded-full bg-amber-600/90 px-2 py-0.5 text-xs text-amber-50 dark:bg-amber-600/80 dark:text-amber-100">
-                  {character.films.length} Film{character.films.length !== 1 ? "s" : ""}
-                </span>
-              )} */}
             </div>
           </div>
         </div>
@@ -96,11 +91,6 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
               color="text-purple-700 dark:text-purple-300"
             />
           </div>
-
-          {/* {character.films.length > 0 && (
-            <ListSection title="Films" items={character.films} color="text-amber-700 dark:text-amber-300" />
-          )} */}
-
           {(character.allies.length > 0 || character.enemies.length > 0) && (
             <div className="grid grid-cols-2 gap-5 border-t border-slate-200 pt-4 dark:border-gray-800">
               <ListSection title="Allies" items={character.allies} color="text-green-700 dark:text-green-300" />

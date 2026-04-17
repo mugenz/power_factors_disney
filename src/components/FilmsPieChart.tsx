@@ -30,9 +30,6 @@ const FilmsPieChart = ({ characters }: FilmsPieChartProps) => {
     const tooltipTitle = isNight ? "#fff" : "#0f172a";
     const tooltipMuted = isNight ? "#9ca3af" : "#64748b";
     const tooltipItem = isNight ? "#d1d5db" : "#334155";
-    const labelColor = isNight ? "#e5e7eb" : "#1e293b";
-    const outlineColor = isNight ? "#111827" : "#f8fafc";
-    const connectorColor = isNight ? "#374151" : "#cbd5e1";
 
     return {
       chart: {
@@ -45,7 +42,7 @@ const FilmsPieChart = ({ characters }: FilmsPieChartProps) => {
       credits: { enabled: false },
       tooltip: {
         useHTML: true,
-        formatter: function (this: Highcharts.Point) {
+        formatter: function () {
           const point = this as Highcharts.Point & { films: string[] };
           const filmsList = point.films
             .map((f: string) => `<li style="margin:2px 0;color:${tooltipItem}">${f}</li>`)
@@ -70,20 +67,8 @@ const FilmsPieChart = ({ characters }: FilmsPieChartProps) => {
         pie: {
           allowPointSelect: true,
           cursor: "pointer",
-          borderWidth: 0,
+          borderWidth: 0.5,
           borderRadius: 4,
-          dataLabels: {
-            enabled: true,
-            format: `<b style="color:${labelColor}">{point.name}</b>`,
-            style: {
-              fontSize: "11px",
-              fontWeight: "500",
-              textOutline: `2px ${outlineColor}`,
-            },
-            distance: 16,
-            connectorWidth: 1,
-            connectorColor,
-          },
           showInLegend: false,
           innerSize: "40%",
         },
