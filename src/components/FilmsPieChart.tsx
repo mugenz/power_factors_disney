@@ -65,6 +65,7 @@ const FilmsPieChart = ({ characters }: FilmsPieChartProps) => {
       },
       plotOptions: {
         pie: {
+          dataLabels: { enabled: false },
           allowPointSelect: true,
           cursor: "pointer",
           borderWidth: 0.5,
@@ -99,7 +100,8 @@ const FilmsPieChart = ({ characters }: FilmsPieChartProps) => {
             chartOptions: {
               plotOptions: {
                 pie: {
-                  dataLabels: { enabled: false },
+                  allowPointSelect: false,
+                  cursor: "default",
                 },
               },
             },

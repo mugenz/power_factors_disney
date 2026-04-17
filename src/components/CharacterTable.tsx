@@ -106,8 +106,8 @@ const CharacterTable = ({
               </th>
               <th className="px-4 py-3 text-center">TV Shows</th>
               <th className="px-4 py-3 text-center">Video Games</th>
-              <th className="px-4 py-3">Allies</th>
-              <th className="px-4 py-3">Enemies</th>
+              <th className="px-4 py-3 text-center">Allies</th>
+              <th className="px-4 py-3 text-center">Enemies</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-slate-200 bg-white dark:divide-gray-800 dark:bg-gray-900/40">
@@ -165,8 +165,8 @@ const CharacterTable = ({
                       {character.videoGames.length}
                     </span>
                   </td>
-                  <td className="px-4 py-3">{formatList(character.allies)}</td>
-                  <td className="px-4 py-3">{formatList(character.enemies)}</td>
+                  <td className="px-4 py-3 text-center">{formatList(character.allies)}</td>
+                  <td className="px-4 py-3 text-center">{formatList(character.enemies)}</td>
                 </tr>
               ))
             )}

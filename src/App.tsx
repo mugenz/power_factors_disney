@@ -136,7 +136,7 @@ const App = () => {
               />
             </div>
 
-            <div className="w-full shrink-0 xl:w-96">
+            <div className="w-full shrink-0 xl:w-[450px]">
               <FilmsPieChart characters={characters} />
             </div>
           </div>
