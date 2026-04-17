@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { ChevronLeftIcon, ChevronRightIcon, SortAscendingIcon, SortDefaultIcon, SortDescendingIcon } from "./icons";
 import type { DisneyCharacter, SortOrder } from "../types/disney";
 
 const PAGE_SIZE_OPTIONS = [10, 20, 50, 100, 200, 500];
@@ -37,46 +38,14 @@ const CharacterTable = ({
     );
   }, [characters, sortOrder]);
 
-  const SortIcon = () => {
-    if (!sortOrder) {
-      return (
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-4 w-4 text-slate-400 dark:text-gray-500"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M7 16V4m0 0L3 8m4-4l4 4M17 8v12m0 0l4-4m-4 4l-4-4"
-          />
-        </svg>
-      );
-    }
-    return (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-4 w-4 text-blue-600 dark:text-blue-400"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
-        <path
-          strokeLinecap="round"
-          strokeLinejoin="round"
-          strokeWidth={2}
-          d={
-            sortOrder === "asc"
-              ? "M3 4h13M3 8h9m-9 4h6m4 0l4-4m0 0l4 4m-4-4v12"
-              : "M3 4h13M3 8h9m-9 4h9m5-4v12m0 0l-4-4m4 4l4-4"
-          }
-        />
-      </svg>
+  const sortIcon =
+    sortOrder === null ? (
+      <SortDefaultIcon className="h-4 w-4 text-slate-400 dark:text-gray-500" />
+    ) : sortOrder === "asc" ? (
+      <SortAscendingIcon className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+    ) : (
+      <SortDescendingIcon className="h-4 w-4 text-blue-600 dark:text-blue-400" />
     );
-  };
 
   const formatList = (items: string[]) => {
     if (!items || items.length === 0) {
@@ -132,7 +101,7 @@ const CharacterTable = ({
                   className="group flex items-center gap-1.5 transition hover:text-slate-900 dark:hover:text-white"
                 >
                   Name
-                  <SortIcon />
+                  {sortIcon}
                 </button>
               </th>
               <th className="px-4 py-3 text-center">TV Shows</th>
@@ -233,15 +202,7 @@ const CharacterTable = ({
               disabled={currentPage <= 1}
               className="flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
+              <ChevronLeftIcon className="h-4 w-4" />
               Prev
             </button>
             <button
@@ -251,15 +212,7 @@ const CharacterTable = ({
               className="flex items-center gap-1 rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-sm text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700"
             >
               Next
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
+              <ChevronRightIcon className="h-4 w-4" />
             </button>
           </div>
         </div>

@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
-import type { DisneyCharacter } from '../types/disney';
+import { useEffect } from "react";
+import { CloseIcon } from "./icons";
+import type { DisneyCharacter } from "../types/disney";
 
 interface CharacterModalProps {
   character: DisneyCharacter | null;
@@ -28,13 +29,13 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
   useEffect(() => {
     if (!character) return;
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      if (e.key === "Escape") onClose();
     };
-    document.addEventListener('keydown', handleKeyDown);
-    document.body.style.overflow = 'hidden';
+    document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
     return () => {
-      document.removeEventListener('keydown', handleKeyDown);
-      document.body.style.overflow = '';
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
     };
   }, [character, onClose]);
 
@@ -62,26 +63,24 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
             onClick={onClose}
             className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white transition hover:bg-black/60 dark:bg-black/50 dark:hover:bg-black/80"
           >
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-            </svg>
+            <CloseIcon className="h-4 w-4" />
           </button>
           <div className="absolute bottom-3 left-5">
             <h2 className="text-2xl font-bold text-slate-900 drop-shadow dark:text-white">{character.name}</h2>
             <div className="mt-1 flex flex-wrap gap-2">
               {character.tvShows.length > 0 && (
                 <span className="rounded-full bg-blue-600/90 px-2 py-0.5 text-xs text-blue-50 dark:bg-blue-600/80 dark:text-blue-100">
-                  {character.tvShows.length} TV Show{character.tvShows.length !== 1 ? 's' : ''}
+                  {character.tvShows.length} TV Show{character.tvShows.length !== 1 ? "s" : ""}
                 </span>
               )}
               {character.videoGames.length > 0 && (
                 <span className="rounded-full bg-purple-600/90 px-2 py-0.5 text-xs text-purple-50 dark:bg-purple-600/80 dark:text-purple-100">
-                  {character.videoGames.length} Video Game{character.videoGames.length !== 1 ? 's' : ''}
+                  {character.videoGames.length} Video Game{character.videoGames.length !== 1 ? "s" : ""}
                 </span>
               )}
               {character.films.length > 0 && (
                 <span className="rounded-full bg-amber-600/90 px-2 py-0.5 text-xs text-amber-50 dark:bg-amber-600/80 dark:text-amber-100">
-                  {character.films.length} Film{character.films.length !== 1 ? 's' : ''}
+                  {character.films.length} Film{character.films.length !== 1 ? "s" : ""}
                 </span>
               )}
             </div>
@@ -91,7 +90,11 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
         <div className="flex flex-col gap-5 overflow-y-auto p-5">
           <div className="grid grid-cols-2 gap-5">
             <ListSection title="TV Shows" items={character.tvShows} color="text-blue-700 dark:text-blue-300" />
-            <ListSection title="Video Games" items={character.videoGames} color="text-purple-700 dark:text-purple-300" />
+            <ListSection
+              title="Video Games"
+              items={character.videoGames}
+              color="text-purple-700 dark:text-purple-300"
+            />
           </div>
 
           {character.films.length > 0 && (
