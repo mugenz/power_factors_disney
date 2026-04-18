@@ -1,73 +1,27 @@
-# React + TypeScript + Vite
+# power_factors_disney
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A **Disney characters dashboard** on top of the public Disney API: search and filter by TV show, paginate a results table, open a character detail modal, see a films distribution chart, and export rows to Excel. Built as an **assignment on behalf of Power Factors**.
 
-Currently, two official plugins are available:
+Developed with **[Cursor](https://cursor.com)** in roughly **8 hours** of focused work.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Stack
 
-## React Compiler
+- **Runtime / UI:** React 19, TypeScript
+- **Build / dev:** Vite 8, `@vitejs/plugin-react`
+- **Styling:** Tailwind CSS 4 (`@tailwindcss/vite`)
+- **Data & charts:** TanStack React Query, Highcharts (`highcharts-react-official`)
+- **Exports:** `xlsx`
+- **Quality:** ESLint 9, Vitest + Testing Library + jsdom
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Scripts
 
-## Expanding the ESLint configuration
+| Command              | What it does                               |
+| -------------------- | ------------------------------------------ |
+| `npm run dev`        | Start dev server (Vite)                    |
+| `npm run build`      | Typecheck (`tsc -b`) then production build |
+| `npm run preview`    | Serve the production build locally         |
+| `npm run lint`       | Run ESLint                                 |
+| `npm test`           | Run tests once                             |
+| `npm run test:watch` | Run tests in watch mode                    |
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+**Prerequisites:** Node.js **22** and npm. Install dependencies with `npm install`.
