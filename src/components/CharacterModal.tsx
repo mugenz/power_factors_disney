@@ -60,6 +60,7 @@ const CharacterModal = ({ character, onClose }: CharacterModalProps) => {
           <div className="absolute inset-0 bg-linear-to-t from-white via-white/20 to-transparent dark:from-gray-900 dark:via-gray-900/20" />
           <button
             type="button"
+            aria-label="Close modal"
             onClick={onClose}
             className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/40 text-white transition hover:bg-black/60 dark:bg-black/50 dark:hover:bg-black/80"
           >
