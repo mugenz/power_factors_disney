@@ -1,7 +1,6 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import Highcharts from "highcharts";
 import { HighchartsReact } from "highcharts-react-official";
-import * as XLSX from "xlsx";
 import type { DisneyCharacter } from "../types/disney";
 import { useTheme } from "../theme/ThemeContext";
 import { ExportIcon } from "./icons";
@@ -14,6 +13,7 @@ interface FilmsPieChartProps {
 const FilmsPieChart = ({ characters, hoveredCharacterId }: FilmsPieChartProps) => {
   const { theme } = useTheme();
   const isNight = theme === "night";
+  const [isExportLoading, setIsExportLoading] = useState(false);
 
   const chartData = useMemo(
     () =>
@@ -123,21 +123,29 @@ const FilmsPieChart = ({ characters, hoveredCharacterId }: FilmsPieChartProps) =
     };
   }, [chartData, hoveredCharacterId, isNight]);
 
-  const handleExportXLSX = () => {
+  const handleExportXLSX = async () => {
     const rows = chartData.map((item) => ({
       "Character Name": item.name,
       "Film Count": item.y,
       Films: item.films.join(", "),
     }));
 
-    const worksheet = XLSX.utils.json_to_sheet(rows);
-    const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Films Data");
+    setIsExportLoading(true);
+    try {
+      const XLSX = await import("xlsx");
+      const sheet = XLSX.default ?? XLSX;
 
-    const colWidths = [{ wch: 30 }, { wch: 12 }, { wch: 80 }];
-    worksheet["!cols"] = colWidths;
+      const worksheet = sheet.utils.json_to_sheet(rows);
+      const workbook = sheet.utils.book_new();
+      sheet.utils.book_append_sheet(workbook, worksheet, "Films Data");
 
-    XLSX.writeFile(workbook, "disney-films-chart.xlsx");
+      const colWidths = [{ wch: 30 }, { wch: 12 }, { wch: 80 }];
+      worksheet["!cols"] = colWidths;
+
+      sheet.writeFile(workbook, "disney-films-chart.xlsx");
+    } finally {
+      setIsExportLoading(false);
+    }
   };
 
   return (
@@ -151,12 +159,12 @@ const FilmsPieChart = ({ characters, hoveredCharacterId }: FilmsPieChartProps) =
         </div>
         <button
           type="button"
-          onClick={handleExportXLSX}
-          disabled={!hasData}
+          onClick={() => void handleExportXLSX()}
+          disabled={!hasData || isExportLoading}
           className="flex items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-sm text-slate-700 transition hover:bg-slate-100 hover:text-slate-900 disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700 dark:hover:text-white"
         >
           <ExportIcon className="h-4 w-4" />
-          Export XLSX
+          {isExportLoading ? "Loading…" : "Export XLSX"}
         </button>
       </div>
 
